@@ -1,0 +1,12 @@
+export { AggregateShapeSequenceArgs } from "./AggregateShapeSequenceArgs";
+export { CreateManyShapeSequenceArgs } from "./CreateManyShapeSequenceArgs";
+export { CreateOneShapeSequenceArgs } from "./CreateOneShapeSequenceArgs";
+export { DeleteManyShapeSequenceArgs } from "./DeleteManyShapeSequenceArgs";
+export { DeleteOneShapeSequenceArgs } from "./DeleteOneShapeSequenceArgs";
+export { FindFirstShapeSequenceArgs } from "./FindFirstShapeSequenceArgs";
+export { FindManyShapeSequenceArgs } from "./FindManyShapeSequenceArgs";
+export { FindUniqueShapeSequenceArgs } from "./FindUniqueShapeSequenceArgs";
+export { GroupByShapeSequenceArgs } from "./GroupByShapeSequenceArgs";
+export { UpdateManyShapeSequenceArgs } from "./UpdateManyShapeSequenceArgs";
+export { UpdateOneShapeSequenceArgs } from "./UpdateOneShapeSequenceArgs";
+export { UpsertOneShapeSequenceArgs } from "./UpsertOneShapeSequenceArgs";

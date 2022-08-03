@@ -1,0 +1,12 @@
+export { AggregateStopTimeArgs } from "./AggregateStopTimeArgs";
+export { CreateManyStopTimeArgs } from "./CreateManyStopTimeArgs";
+export { CreateOneStopTimeArgs } from "./CreateOneStopTimeArgs";
+export { DeleteManyStopTimeArgs } from "./DeleteManyStopTimeArgs";
+export { DeleteOneStopTimeArgs } from "./DeleteOneStopTimeArgs";
+export { FindFirstStopTimeArgs } from "./FindFirstStopTimeArgs";
+export { FindManyStopTimeArgs } from "./FindManyStopTimeArgs";
+export { FindUniqueStopTimeArgs } from "./FindUniqueStopTimeArgs";
+export { GroupByStopTimeArgs } from "./GroupByStopTimeArgs";
+export { UpdateManyStopTimeArgs } from "./UpdateManyStopTimeArgs";
+export { UpdateOneStopTimeArgs } from "./UpdateOneStopTimeArgs";
+export { UpsertOneStopTimeArgs } from "./UpsertOneStopTimeArgs";

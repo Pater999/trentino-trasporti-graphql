@@ -1,0 +1,27 @@
+version: '3.9'
+services:
+    db:
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_USER: root
+            POSTGRES_PASSWORD: password
+            POSTGRES_DB: trentino-trasporti
+        ports:
+            - '5432:5432'
+        expose:
+            - '5432'
+    node-app:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+            target: base
+        volumes:
+            - ./src:/app/src
+        env_file:
+            - env.dev
+        ports:
+            - '4000:4000'
+        expose:
+            - '4000'
+        command: npm run dev

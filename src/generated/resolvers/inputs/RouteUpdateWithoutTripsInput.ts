@@ -1,0 +1,54 @@
+import * as TypeGraphQL from "type-graphql";
+import * as GraphQLScalars from "graphql-scalars";
+import { Prisma } from "@prisma/client";
+import { DecimalJSScalar } from "../../scalars";
+import { AgencyUpdateOneRequiredWithoutRoutesNestedInput } from "../inputs/AgencyUpdateOneRequiredWithoutRoutesNestedInput";
+import { EnumRouteCategoryFieldUpdateOperationsInput } from "../inputs/EnumRouteCategoryFieldUpdateOperationsInput";
+import { EnumRouteTypeFieldUpdateOperationsInput } from "../inputs/EnumRouteTypeFieldUpdateOperationsInput";
+import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
+import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
+
+@TypeGraphQL.InputType("RouteUpdateWithoutTripsInput", {
+  isAbstract: true
+})
+export class RouteUpdateWithoutTripsInput {
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  routeId?: StringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => AgencyUpdateOneRequiredWithoutRoutesNestedInput, {
+    nullable: true
+  })
+  agency?: AgencyUpdateOneRequiredWithoutRoutesNestedInput | undefined;
+
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  routeShortName?: StringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  routeLongName?: StringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => EnumRouteTypeFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  routeType?: EnumRouteTypeFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => NullableStringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  routeColor?: NullableStringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => NullableStringFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  routeTextColor?: NullableStringFieldUpdateOperationsInput | undefined;
+
+  @TypeGraphQL.Field(_type => EnumRouteCategoryFieldUpdateOperationsInput, {
+    nullable: true
+  })
+  category?: EnumRouteCategoryFieldUpdateOperationsInput | undefined;
+}

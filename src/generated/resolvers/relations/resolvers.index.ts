@@ -1,0 +1,10 @@
+export { AgencyRelationsResolver } from "./Agency/AgencyRelationsResolver";
+export { CalendarRelationsResolver } from "./Calendar/CalendarRelationsResolver";
+export { CalendarDateRelationsResolver } from "./CalendarDate/CalendarDateRelationsResolver";
+export { RouteRelationsResolver } from "./Route/RouteRelationsResolver";
+export { ShapeRelationsResolver } from "./Shape/ShapeRelationsResolver";
+export { ShapeSequenceRelationsResolver } from "./ShapeSequence/ShapeSequenceRelationsResolver";
+export { StopRelationsResolver } from "./Stop/StopRelationsResolver";
+export { StopTimeRelationsResolver } from "./StopTime/StopTimeRelationsResolver";
+export { TransferRelationsResolver } from "./Transfer/TransferRelationsResolver";
+export { TripRelationsResolver } from "./Trip/TripRelationsResolver";

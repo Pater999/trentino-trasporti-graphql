@@ -1,0 +1,154 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "../node_modules/.prisma/client"
+}
+
+generator typegraphql {
+  provider = "typegraphql-prisma"
+  output   = "../src/generated"
+  simpleResolvers = true
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+enum WheelchairAccessible {
+  NO_INFO
+  YES
+  NO
+}
+
+enum Direction {
+  WAY
+  RETURN
+}
+
+enum RouteCategory {
+  URBAN
+  SUBURBAN
+}
+
+enum RouteType {
+  TRAM
+  SUBWAY
+  TRAIN
+  BUS
+  FERRY
+  CABLE_CAR
+  GONDOLA
+  ROPE_WAY
+}
+
+model Trip {
+  tripId                 String @id
+  routeId                String 
+  route                  Route @relation(fields: [routeId], references: [routeId])
+  category               RouteCategory @default(URBAN)
+  serviceId              String
+  service                Calendar @relation(fields: [serviceId], references: [serviceId])
+  tripHeadsign           String
+  directionId            Direction @default(WAY)
+  shapeId                String?
+  shape                  Shape? @relation(fields: [shapeId], references: [shapeId])
+  wheelchairAccessible   WheelchairAccessible  @default(NO_INFO)
+  stopTimes              StopTime[]
+}
+
+model Agency {
+  agencyId         Int @id
+  agencyName       String
+  agencyUrl        String
+  agencyTimezone   String
+  agencyPhone      String
+  agencyLang       String
+  routes           Route[]
+}
+
+model Calendar {
+  serviceId         String @id
+  monday            Boolean
+  tuesday           Boolean
+  wednesday         Boolean
+  thursday          Boolean
+  friday            Boolean
+  saturday          Boolean
+  sunday            Boolean
+  startDate         DateTime?
+  endDate           DateTime?
+  calendarDates     CalendarDate[]
+  trips             Trip[]
+}
+
+model CalendarDate {
+  serviceId       String
+  service         Calendar @relation(fields: [serviceId], references: [serviceId])
+  date            DateTime
+  exceptionType   Boolean     // Included or excluded
+  @@id([serviceId, date])
+}
+
+model Route {
+  routeId           String @id
+  agencyId          Int
+  agency            Agency @relation(fields: [agencyId], references: [agencyId])
+  routeShortName    String
+  routeLongName     String
+  routeType         RouteType
+  routeColor        String?
+  routeTextColor    String?
+  trips             Trip[]
+  category          RouteCategory @default(URBAN)
+}
+
+model Shape {
+  shapeId             String @id
+  trips               Trip[]
+  shapeSequences      ShapeSequence[]
+}
+
+model ShapeSequence {
+  shapeId             String
+  shape               Shape @relation(fields: [shapeId], references: [shapeId])
+  shapePtLat          Decimal 
+  shapePtLon          Decimal
+  shapePtSequence     Int   
+  @@id([shapeId, shapePtSequence])
+}
+
+model StopTime {
+  tripId             String
+  trip               Trip @relation(fields: [tripId], references: [tripId])
+  arrivalTime        String
+  departureTime      String
+  stopId             String
+  stop               Stop @relation(fields: [stopId], references: [stopId])
+  stopSequence       Int
+  @@id([tripId, stopSequence])
+}
+
+model Stop {
+  stopId                String @id
+  stopCode              String
+  stopName              String
+  stopDesc              String
+  stopLat               Decimal
+  stopLon               Decimal
+  zoneId                Int?
+  wheelchairBoarding    WheelchairAccessible @default(NO_INFO)
+  transfersFrom         Transfer[] @relation("transfersFrom")
+  transfersTo           Transfer[] @relation("transfersTo")
+  stopTimes             StopTime[]
+  category              RouteCategory @default(URBAN)
+}
+
+model Transfer {
+  fromStopId        String
+  fromStop          Stop  @relation(name: "transfersFrom", fields: [fromStopId], references: [stopId])
+  toStopId          String
+  toStop            Stop  @relation(name: "transfersTo", fields: [toStopId], references: [stopId])
+  transferType      Int
+  minTransferTime   Int
+  @@id([fromStopId, toStopId])
+}

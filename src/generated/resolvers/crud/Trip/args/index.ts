@@ -1,0 +1,12 @@
+export { AggregateTripArgs } from "./AggregateTripArgs";
+export { CreateManyTripArgs } from "./CreateManyTripArgs";
+export { CreateOneTripArgs } from "./CreateOneTripArgs";
+export { DeleteManyTripArgs } from "./DeleteManyTripArgs";
+export { DeleteOneTripArgs } from "./DeleteOneTripArgs";
+export { FindFirstTripArgs } from "./FindFirstTripArgs";
+export { FindManyTripArgs } from "./FindManyTripArgs";
+export { FindUniqueTripArgs } from "./FindUniqueTripArgs";
+export { GroupByTripArgs } from "./GroupByTripArgs";
+export { UpdateManyTripArgs } from "./UpdateManyTripArgs";
+export { UpdateOneTripArgs } from "./UpdateOneTripArgs";
+export { UpsertOneTripArgs } from "./UpsertOneTripArgs";

@@ -1,0 +1,12 @@
+export { AggregateShapeArgs } from "./AggregateShapeArgs";
+export { CreateManyShapeArgs } from "./CreateManyShapeArgs";
+export { CreateOneShapeArgs } from "./CreateOneShapeArgs";
+export { DeleteManyShapeArgs } from "./DeleteManyShapeArgs";
+export { DeleteOneShapeArgs } from "./DeleteOneShapeArgs";
+export { FindFirstShapeArgs } from "./FindFirstShapeArgs";
+export { FindManyShapeArgs } from "./FindManyShapeArgs";
+export { FindUniqueShapeArgs } from "./FindUniqueShapeArgs";
+export { GroupByShapeArgs } from "./GroupByShapeArgs";
+export { UpdateManyShapeArgs } from "./UpdateManyShapeArgs";
+export { UpdateOneShapeArgs } from "./UpdateOneShapeArgs";
+export { UpsertOneShapeArgs } from "./UpsertOneShapeArgs";

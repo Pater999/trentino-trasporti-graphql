@@ -1,0 +1,12 @@
+export { AggregateTransferArgs } from "./AggregateTransferArgs";
+export { CreateManyTransferArgs } from "./CreateManyTransferArgs";
+export { CreateOneTransferArgs } from "./CreateOneTransferArgs";
+export { DeleteManyTransferArgs } from "./DeleteManyTransferArgs";
+export { DeleteOneTransferArgs } from "./DeleteOneTransferArgs";
+export { FindFirstTransferArgs } from "./FindFirstTransferArgs";
+export { FindManyTransferArgs } from "./FindManyTransferArgs";
+export { FindUniqueTransferArgs } from "./FindUniqueTransferArgs";
+export { GroupByTransferArgs } from "./GroupByTransferArgs";
+export { UpdateManyTransferArgs } from "./UpdateManyTransferArgs";
+export { UpdateOneTransferArgs } from "./UpdateOneTransferArgs";
+export { UpsertOneTransferArgs } from "./UpsertOneTransferArgs";
