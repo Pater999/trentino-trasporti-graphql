@@ -17,7 +17,7 @@ RUN npm set-script prepare ""
 RUN npm ci --omit=dev
 COPY --from=ts-compiler /usr/app/node_modules/.prisma/client ./node_modules/.prisma/client
 
-FROM gcr.io/distroless/nodejs:16
+FROM node:16
 WORKDIR /usr/app
 COPY --from=ts-remover /usr/app ./
-CMD ["index.js"]
+CMD ["node", "index.js"]
