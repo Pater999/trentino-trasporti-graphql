@@ -1,10 +1,4 @@
-import {
-    Direction,
-    PrismaClient,
-    RouteType,
-    WheelchairAccessible,
-    RouteCategory,
-} from '@prisma/client'
+import 'reflect-metadata'
 import axios from 'axios'
 import AdmZip from 'adm-zip'
 import csv from 'csvtojson'
@@ -14,13 +8,18 @@ import {
     Agency,
     Calendar,
     CalendarDate,
+    Direction,
     Route,
+    RouteCategory,
+    RouteType,
     ShapeSequence,
     Stop,
     StopTime,
     Transfer,
     Trip,
+    WheelchairAccessible,
 } from '../src/generated'
+import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 

@@ -4,11 +4,14 @@ import express from 'express'
 import cors from 'cors'
 import compression from 'compression'
 import { ApolloServer, ForbiddenError } from 'apollo-server-express'
+import Keyv from "keyv";
+import { KeyvAdapter } from "@apollo/utils.keyvadapter";
 import { GeneralUtils } from './utils/general_utils'
 import { initContext } from './context'
 import {
     ApolloServerPluginLandingPageLocalDefault,
     ApolloServerPluginLandingPageProductionDefault,
+    ApolloServerPluginCacheControl
 } from 'apollo-server-core'
 import { buildSchema } from 'type-graphql'
 import path from 'path'
@@ -19,6 +22,8 @@ const corsOptions = {
     allowedHeaders: ['Content-type', 'Authorization'],
     methods: ['OPTIONS, GET, POST, PUT, PATCH, DELETE'],
 }
+
+const port = process.env.port ?? 8080;
 
 const main = async () => {
     const app = express()
@@ -47,19 +52,21 @@ const main = async () => {
             return error
         },
         plugins: [
+            ApolloServerPluginCacheControl({ defaultMaxAge: 210 }),
             GeneralUtils.isDev()
                 ? ApolloServerPluginLandingPageLocalDefault()
                 : ApolloServerPluginLandingPageProductionDefault(),
         ],
+        cache: new KeyvAdapter(new Keyv(process.env.REDIS_URL)), 
     })
 
     await server.start()
     server.applyMiddleware({ app })
 
     // START SERVER
-    app.listen({ port: 4000 }, () =>
+    app.listen({ port }, () =>
         console.log(
-            `🚀 Server ready at http://localhost:4000${server.graphqlPath}`
+            `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`
         )
     )
 }

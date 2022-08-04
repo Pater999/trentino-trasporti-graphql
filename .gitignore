@@ -130,3 +130,7 @@ dist
 .pnp.*
 
 *.DS_Store
+
+env.prod
+
+src/generated-prisma-client

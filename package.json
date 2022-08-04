@@ -6,15 +6,18 @@
     "author": "Pater999 <39135429+Pater999@users.noreply.github.com>",
     "license": "MIT",
     "scripts": {
-        "prebuild": "npm run prisma:generate",
+        "postinstall": "npm run prisma:generate",
         "start": "node dist/index.js",
+        "dev:migrate": "prisma migrate deploy && npm run dev",
         "build": "tsc",
         "dev": "ts-node-dev --no-notify --respawn --transpile-only src/index.ts",
         "lint": "npx prettier --write .",
-        "prisma:seed": "npx prisma db seed",
-        "prisma:migrate-dev": "npx prisma migrate dev",
+        "prisma:seed": "prisma db seed",
+        "prisma:migrate-dev": "prisma migrate dev",
         "prisma:generate": "npx prisma generate",
-        "prisma:format": "npx prisma format"
+        "prisma:format": "npx prisma format",
+        "prisma:migrate-deploy": "npx prisma migrate deploy",
+        "prepare": "husky install"
     },
     "husky": {
         "hooks": {
@@ -25,7 +28,10 @@
         "seed": "ts-node prisma/seed.ts"
     },
     "dependencies": {
+        "@apollo/utils.keyvadapter": "^1.1.1",
+        "@keyv/redis": "^2.3.9",
         "@prisma/client": "^4.1.1",
+        "@types/ioredis": "4.28.10",
         "adm-zip": "^0.5.9",
         "apollo-server-express": "^3.10.0",
         "axios": "^0.27.2",
@@ -37,15 +43,15 @@
         "graphql": "^15.8.0",
         "graphql-fields": "^2.0.3",
         "graphql-scalars": "^1.17.0",
+        "ioredis": "5.2.2",
+        "keyv": "^4.3.3",
         "lodash": "^4.17.21",
         "luxon": "^3.0.1",
+        "prisma-redis-middleware": "4.0.8",
         "reflect-metadata": "^0.1.13",
         "type-graphql": "^1.1.1"
     },
     "devDependencies": {
-        "@graphql-codegen/cli": "^2.11.2",
-        "@graphql-codegen/typescript": "^2.7.2",
-        "@graphql-codegen/typescript-resolvers": "^2.7.2",
         "@types/adm-zip": "^0.5.0",
         "@types/compression": "^1.7.2",
         "@types/cors": "^2.8.12",

@@ -1,4 +1,4 @@
-FROM node:16 as base
+FROM node:16
 WORKDIR /app
 
 COPY package*.json ./
@@ -6,4 +6,4 @@ COPY tsconfig.json ./
 COPY ./src ./src
 COPY ./prisma ./prisma
 
-RUN npm ci && npm run build
+RUN npm ci
