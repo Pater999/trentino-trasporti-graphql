@@ -23,7 +23,7 @@ const corsOptions = {
     methods: ['OPTIONS, GET, POST, PUT, PATCH, DELETE'],
 }
 
-const port = process.env.port ?? 8080;
+const port = process.env.PORT || 8080;
 
 const main = async () => {
     const app = express()
