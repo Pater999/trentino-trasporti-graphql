@@ -5,8 +5,10 @@ export interface MyContext {
     prisma: PrismaClient
 }
 
+export const prisma = new PrismaClient()
+
 export const initContext = async (ctx: ExpressContext): Promise<MyContext> => {
-    const prisma = new PrismaClient()
+   
     await prisma.$connect()
 
     return {
