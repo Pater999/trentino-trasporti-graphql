@@ -1,3 +1,4 @@
+/* eslint-disable */
 import 'reflect-metadata'
 import axios from 'axios'
 import AdmZip from 'adm-zip'
@@ -44,9 +45,9 @@ async function getAndInsertDataFromTrentinoTrasporti(
             responseType: 'arraybuffer',
         })
 
-        let zip: any = new AdmZip(response.data)
+        const zip: any = new AdmZip(response.data)
 
-        var zipEntries = zip.getEntries()
+        const zipEntries = zip.getEntries()
 
         let routes: Route[] = []
         let stops: Stop[] = []
@@ -112,9 +113,9 @@ async function getAndInsertDataFromTrentinoTrasporti(
                         ...k,
                         date: k.date
                             ? DateTime.fromFormat(
-                                  k.date + ' 01:00:00',
-                                  'yyyyMMdd hh:mm:ss'
-                              ).toJSDate()
+                                k.date + ' 01:00:00',
+                                'yyyyMMdd hh:mm:ss'
+                            ).toJSDate()
                             : null,
                         exceptionType: k.exceptionType === '1',
                         serviceId: `${routeCategory}_${k.serviceId}`,
@@ -244,15 +245,15 @@ function parseCalendar(calendar: any, routeCategory: RouteCategory): Calendar {
         serviceId: `${routeCategory}_${calendar.serviceId}`,
         endDate: calendar.endDate
             ? DateTime.fromFormat(
-                  calendar.endDate + ' 01:00:00',
-                  'yyyyMMdd hh:mm:ss'
-              ).toJSDate()
+                calendar.endDate + ' 01:00:00',
+                'yyyyMMdd hh:mm:ss'
+            ).toJSDate()
             : null,
         startDate: calendar.startDate
             ? DateTime.fromFormat(
-                  calendar.startDate + ' 01:00:00',
-                  'yyyyMMdd hh:mm:ss'
-              ).toJSDate()
+                calendar.startDate + ' 01:00:00',
+                'yyyyMMdd hh:mm:ss'
+            ).toJSDate()
             : null,
         monday: calendar.monday === '1',
         tuesday: calendar.tuesday === '1',
