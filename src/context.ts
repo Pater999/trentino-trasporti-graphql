@@ -8,11 +8,10 @@ export interface MyContext {
 export const prisma = new PrismaClient()
 
 export const initContext = async (ctx: ExpressContext): Promise<MyContext> => {
-   
     await prisma.$connect()
 
     return {
         ...ctx,
-        prisma,
+        prisma
     }
 }
