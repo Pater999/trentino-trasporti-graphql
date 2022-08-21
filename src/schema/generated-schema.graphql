@@ -1108,6 +1108,7 @@ type Query {
   findFirstStopTime(cursor: StopTimeWhereUniqueInput, distinct: [StopTimeScalarFieldEnum!], orderBy: [StopTimeOrderByWithRelationInput!], skip: Int, take: Int, where: StopTimeWhereInput): StopTime
   findFirstTransfer(cursor: TransferWhereUniqueInput, distinct: [TransferScalarFieldEnum!], orderBy: [TransferOrderByWithRelationInput!], skip: Int, take: Int, where: TransferWhereInput): Transfer
   findFirstTrip(cursor: TripWhereUniqueInput, distinct: [TripScalarFieldEnum!], orderBy: [TripOrderByWithRelationInput!], skip: Int, take: Int, where: TripWhereInput): Trip
+  findNearestStops(latitude: Float!, longitude: Float!, radius: Float = 1): [Stop!]!
   groupByAgency(by: [AgencyScalarFieldEnum!]!, having: AgencyScalarWhereWithAggregatesInput, orderBy: [AgencyOrderByWithAggregationInput!], skip: Int, take: Int, where: AgencyWhereInput): [AgencyGroupBy!]!
   groupByCalendar(by: [CalendarScalarFieldEnum!]!, having: CalendarScalarWhereWithAggregatesInput, orderBy: [CalendarOrderByWithAggregationInput!], skip: Int, take: Int, where: CalendarWhereInput): [CalendarGroupBy!]!
   groupByCalendarDate(by: [CalendarDateScalarFieldEnum!]!, having: CalendarDateScalarWhereWithAggregatesInput, orderBy: [CalendarDateOrderByWithAggregationInput!], skip: Int, take: Int, where: CalendarDateWhereInput): [CalendarDateGroupBy!]!
@@ -1119,12 +1120,14 @@ type Query {
   groupByTransfer(by: [TransferScalarFieldEnum!]!, having: TransferScalarWhereWithAggregatesInput, orderBy: [TransferOrderByWithAggregationInput!], skip: Int, take: Int, where: TransferWhereInput): [TransferGroupBy!]!
   groupByTrip(by: [TripScalarFieldEnum!]!, having: TripScalarWhereWithAggregatesInput, orderBy: [TripOrderByWithAggregationInput!], skip: Int, take: Int, where: TripWhereInput): [TripGroupBy!]!
   route(where: RouteWhereUniqueInput!): Route
+  routeDateTrips(currentDate: DateTime!, routeId: String!, skip: Int, take: Int): [Trip!]
   routes(cursor: RouteWhereUniqueInput, distinct: [RouteScalarFieldEnum!], orderBy: [RouteOrderByWithRelationInput!], skip: Int, take: Int, where: RouteWhereInput): [Route!]!
   shape(where: ShapeWhereUniqueInput!): Shape
   shapeSequence(where: ShapeSequenceWhereUniqueInput!): ShapeSequence
   shapeSequences(cursor: ShapeSequenceWhereUniqueInput, distinct: [ShapeSequenceScalarFieldEnum!], orderBy: [ShapeSequenceOrderByWithRelationInput!], skip: Int, take: Int, where: ShapeSequenceWhereInput): [ShapeSequence!]!
   shapes(cursor: ShapeWhereUniqueInput, distinct: [ShapeScalarFieldEnum!], orderBy: [ShapeOrderByWithRelationInput!], skip: Int, take: Int, where: ShapeWhereInput): [Shape!]!
   stop(where: StopWhereUniqueInput!): Stop
+  stopDateTimeTables(currentDate: DateTime!, skip: Int, stopId: String!, take: Int): [StopTime!]
   stopTime(where: StopTimeWhereUniqueInput!): StopTime
   stopTimes(cursor: StopTimeWhereUniqueInput, distinct: [StopTimeScalarFieldEnum!], orderBy: [StopTimeOrderByWithRelationInput!], skip: Int, take: Int, where: StopTimeWhereInput): [StopTime!]!
   stops(cursor: StopWhereUniqueInput, distinct: [StopScalarFieldEnum!], orderBy: [StopOrderByWithRelationInput!], skip: Int, take: Int, where: StopWhereInput): [Stop!]!

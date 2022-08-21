@@ -60,8 +60,14 @@ import {
     StopRelationsResolver,
     StopTimeRelationsResolver,
     TransferRelationsResolver,
-    TripRelationsResolver,
+    TripRelationsResolver
 } from '../generated'
+
+import {
+    CustomStopResolver,
+    CustomStopTimeResolver,
+    CustomTripResolver
+} from './customResolvers'
 
 const resolvers: NonEmptyArray<Function> | NonEmptyArray<string> = [
     // Agency
@@ -135,6 +141,10 @@ const resolvers: NonEmptyArray<Function> | NonEmptyArray<string> = [
     StopTimeRelationsResolver,
     TransferRelationsResolver,
     TripRelationsResolver,
+    // Custom
+    CustomStopResolver,
+    CustomStopTimeResolver,
+    CustomTripResolver
 ]
 
 export default resolvers
