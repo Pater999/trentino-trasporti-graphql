@@ -4,12 +4,12 @@ import express from 'express'
 import cors from 'cors'
 import compression from 'compression'
 import { ApolloServer, ForbiddenError } from 'apollo-server-express'
-import { InMemoryLRUCache } from '@apollo/utils.keyvaluecache';
-import { GeneralUtils } from './utils/general_utils'
+import { InMemoryLRUCache } from '@apollo/utils.keyvaluecache'
+import { isDev, isProduction } from './utils/general_utils'
 import { initContext } from './context'
 import {
     ApolloServerPluginLandingPageLocalDefault,
-    ApolloServerPluginLandingPageProductionDefault,
+    ApolloServerPluginLandingPageProductionDefault
 } from 'apollo-server-core'
 import { buildSchema } from 'type-graphql'
 import path from 'path'
@@ -18,10 +18,10 @@ import resolvers from './resolvers/resolvers'
 const corsOptions = {
     origin: '*',
     allowedHeaders: ['Content-type', 'Authorization'],
-    methods: ['OPTIONS, GET, POST, PUT, PATCH, DELETE'],
+    methods: ['OPTIONS, GET, POST, PUT, PATCH, DELETE']
 }
 
-const port = process.env.PORT ?? 8080;
+const port = process.env.PORT ?? 8080
 
 const main = async () => {
     const app = express()
@@ -35,14 +35,14 @@ const main = async () => {
         emitSchemaFile: path.resolve(
             __dirname,
             './schema/generated-schema.graphql'
-        ),
+        )
     })
 
     // INIT GRAPHQL SERVER
     const server = new ApolloServer({
         schema,
         context: initContext,
-        introspection: GeneralUtils.isDev(),
+        introspection: isDev(),
         formatError: (error) => {
             if (error.message.startsWith('Access denied!')) {
                 return new ForbiddenError(error.message)
@@ -50,17 +50,17 @@ const main = async () => {
             return error
         },
         plugins: [
-            GeneralUtils.isDev()
-                ? ApolloServerPluginLandingPageLocalDefault()
-                : ApolloServerPluginLandingPageProductionDefault(),
+            isProduction()
+                ? ApolloServerPluginLandingPageProductionDefault()
+                : ApolloServerPluginLandingPageLocalDefault()
         ],
-        // cache: new KeyvAdapter(new Keyv(process.env.REDIS_URL)), 
+        // cache: new KeyvAdapter(new Keyv(process.env.REDIS_URL)),
         cache: new InMemoryLRUCache({
             // ~100MiB
             maxSize: Math.pow(2, 20) * 100,
             // 5 minutes (in milliseconds)
-            ttl: 300_000,
-        }),
+            ttl: 300_000
+        })
     })
 
     await server.start()
@@ -74,4 +74,4 @@ const main = async () => {
     )
 }
 
-main()
+void main()
