@@ -134,3 +134,4 @@ dist
 env.prod
 
 src/generated-prisma-client
+ecosystem.config.js

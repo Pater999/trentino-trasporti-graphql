@@ -1,0 +1,43 @@
+name: Node.js -> SSH deployment CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Update version
+        run: npm set-script prepare ""
+      - name: Install dependencies
+        run: npm ci
+      - name: Running build task
+        run: npm run build
+      - name: moving package.json to dist folder
+        run: mv -i -v package.json ./dist && mv -i -v package-lock.json ./dist
+      - name: Install production dependencies
+        run: npm install --omit=dev
+        working-directory: ./dist
+      - name: moving .prisma/client
+        run: cp -a ./node_modules/.prisma/client/. ./dist/node_modules/.prisma/client/
+      - name: Deploying to Server
+        uses: easingthemes/ssh-deploy@v2
+        env:
+          ARGS: '-rltgoDzvO --delete'
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          SOURCE: './dist/'
+          TARGET: '/home/trentino-trasporti-graphql/server'
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
